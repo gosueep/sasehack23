@@ -1,11 +1,5 @@
 from typing import Union
-from fastapi import FastAPI
-
-# from pymongo.mongo_client import MongoClient
-# from pymongo.server_api import ServerApi
-# uri = "mongodb+srv://mongo:IU1vQmHaqMbox24D@sase.tktciax.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
-# # Create a new client and connect to the server
-# client = MongoClient(uri, server_api=ServerApi('1'))
+from fastapi import FastAPI, Request
 
 from pymongo import MongoClient
 def get_database():
@@ -25,6 +19,12 @@ print(db["people"].find_one())
 for item in db["people"].find():
     print(item)
 
+
+
+##############
+## API
+##############
+
 app = FastAPI()
 
 
@@ -36,3 +36,31 @@ def read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
+
+
+# Create User Interests to User
+# add event
+@app.post("/create_user")
+async def create_user(req: Request):
+    
+    {
+        "name": "asdfasdf",
+        "interests": "[dsfasdf, asdf, asd, asdf]",
+        "location": "golden",
+        "events": "[]"
+    }
+    
+    
+    print(req)
+    return await req.json()
+
+
+# Get a match
+
+
+### CHAT
+# Chat
+
+# Get messages
+# Send Message
+
