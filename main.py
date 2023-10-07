@@ -17,11 +17,11 @@ def get_database():
    client = MongoClient(CONNECTION_STRING)
  
    # Create the database for our example (we will use the same database throughout the tutorial
-   return client['peopler']
+   return client['Peopler']
   
 db = get_database()
 print(db)
-print(db["people"])
+print(db["people"].find_one())
 for item in db["people"].find():
     print(item)
 
