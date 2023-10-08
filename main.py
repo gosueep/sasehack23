@@ -1,7 +1,7 @@
 from typing import Union
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from db import db_create_user, db_get_messages, db_get_user, db_match
+from db import db_create_user, db_get_messages, db_get_user, db_match, db_chat_screen
 
 ##############
 ## API
@@ -86,6 +86,23 @@ async def get_match(req: Request):
 ### CHAT
 # Chat
 
+texts = []
+
+@app.post("/send_message")
+async def send_message(req: Request):
+    json = await req.json()             #will be a request to send a message
+    message = json.get("message")
+    
+    if message:
+        texts.append({"sender": "You (The person writing the messaeg)", "message": message})    #the message will be appeneded to the texts array
+        return {"message": "Delivered"}     #if there is a message
+    else:
+        return {"message": "Empty"}         #if there is no message
+
+#will be used to look at past messages taht are stored into texts
+@app.get("/receive_messages")
+def receive_messages():
+    return texts
 # Get messages
 # Send Message
 
