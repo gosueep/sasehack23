@@ -97,6 +97,10 @@ export default {
       }, 1250)
     },
     cont2 () {
+      if (!this.code_val.match(/[0-9]{6}/)) {
+        alert('Error: Invalid code entered.')
+        return
+      }
       this.showSpin = true
       setTimeout(() => {
         this.step = -1

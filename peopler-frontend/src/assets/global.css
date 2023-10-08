@@ -32,12 +32,24 @@ input, button {
   transition: all 0.24s;
 }
 
-input:hover, input:focus, button:hover {
+button.btn-gray {
+  background-color: #f2f0eb;
+}
+
+button.btn-gray:hover:not(:disabled) {
+  background-color: #f2e7cc;
+}
+
+input:hover, input:focus, button:hover:not(:disabled) {
   background-color: #ffce89;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   cursor: pointer;
+}
+
+button:active:not(:disabled) {
+  background-color: #f4b967;
 }
 
 input:focus {
