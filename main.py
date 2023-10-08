@@ -1,25 +1,6 @@
 from typing import Union
 from fastapi import FastAPI, Request
-
-from pymongo import MongoClient
-def get_database():
- 
-   # Provide the mongodb atlas url to connect python to mongodb using pymongo
-   CONNECTION_STRING = "mongodb+srv://mongo:IU1vQmHaqMbox24D@sase.tktciax.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
- 
-   # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-   client = MongoClient(CONNECTION_STRING)
- 
-   # Create the database for our example (we will use the same database throughout the tutorial
-   return client['Peopler']
-  
-db = get_database()
-print(db)
-print(db["people"].find_one())
-for item in db["people"].find():
-    print(item)
-
-
+from db import db_create_user, db_get_messages, db_get_user, db_match
 
 ##############
 ## API
@@ -45,17 +26,37 @@ async def create_user(req: Request):
     
     {
         "name": "asdfasdf",
+        "pronouns": "he",
         "interests": "[dsfasdf, asdf, asd, asdf]",
         "location": "golden",
         "events": "[]"
     }
     
-    
-    print(req)
-    return await req.json()
+    # print(req)
+    json = await req.json()
+    uid = db_create_user(json)
+    return {'user_id': uid}
 
 
 # Get a match
+@app.post("/get_match")
+async def get_match(req: Request):
+    
+    {
+        "name": "asdfasdf",
+        "pronouns": "he",
+        "interests": "[dsfasdf, asdf, asd, asdf]",
+        "location": "golden",
+        "events": "[]"
+    }
+    
+    json = await req.json()
+    print('json', json)
+    user = db_match(json['user_id'])
+    user['_id'] = str(user['_id'])
+    print(user)
+    return {'user': user}
+
 
 
 ### CHAT
