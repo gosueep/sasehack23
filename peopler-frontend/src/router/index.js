@@ -19,6 +19,11 @@ const routes = [
     path: '/onboarding',
     name: 'onboarding',
     component: () => import('../views/OnboardingView.vue')
+  },
+  {
+    path: '/matching',
+    name: 'matching',
+    component: () => import('../views/MatchView.vue')
   }
 ]
 

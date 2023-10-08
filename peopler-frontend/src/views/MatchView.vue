@@ -38,61 +38,6 @@
 </style>
 
 <script>
-// Provided by ChatGPT. Thanks!
-const hobbiesAndInterests = [
-  'Reading',
-  'Hiking',
-  'Cooking',
-  'Painting',
-  'Gardening',
-  'Photography',
-  'Swimming',
-  'Playing a musical instrument',
-  'Cycling',
-  'Yoga',
-  'Traveling',
-  'Fishing',
-  'Singing',
-  'Dancing',
-  'Drawing',
-  'Watching movies',
-  'Playing video games',
-  'Birdwatching',
-  'Knitting',
-  'Writing',
-  'Collecting stamps',
-  'Playing chess',
-  'Running',
-  'Baking',
-  'Sculpting',
-  'Meditation',
-  'Woodworking',
-  'Skiing',
-  'Camping',
-  'Rock climbing'
-]
-const funEventsAndActivities = [
-  'Concerts',
-  'Sports games',
-  'Festivals',
-  'Movie nights',
-  'Yoga days',
-  'Picnics',
-  'Amusement park visits',
-  'Art gallery visits',
-  'Karaoke night',
-  'Board game night',
-  'Trivia night',
-  'Wine tasting',
-  'Cooking classes',
-  'Escape rooms',
-  'Stand-up comedy shows',
-  'Hiking trips',
-  'Dance parties',
-  'Cosplay conventions',
-  'Scavenger hunts',
-  'Cookouts'
-]
 
 export default {
   data: function () {
@@ -103,32 +48,23 @@ export default {
       i_loc: '',
       i_pronouns: '',
       // Hobbies and interests
-      hobbiesAndInterests,
       selHobbies: [],
       // Events and activites
-      funEventsAndActivities,
       selEvents: []
     }
   },
   methods: {
-    async submit () {
-      this.isSubmitting = true
-      const resp = await fetch(`${this.$api_base_url}/create_user`, {
+    async getMatch () {
+      this.loading = true
+      const resp = await fetch(`${this.$api_base_url}/get_match`, {
         method: 'post',
         body: JSON.stringify({
-          name: this.i_name,
-          location: this.i_loc,
-          pronouns: this.i_pronouns,
-          hobbies: this.selHobbies,
-          events: this.selEvents
+          user_id: this.i_name
         })
       })
-      const uid = await resp.json()
-      console.log(uid)
-      console.log(uid.user_id)
-      localStorage.setItem('uid', uid.user_id)
-      this.isSubmitting = false
-      // this.$router.push('/matching')
+      console.log(resp)
+      this.loading = false
+      this.$router.push('/matching')
     }
   }
 }

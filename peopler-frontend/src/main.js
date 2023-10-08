@@ -11,5 +11,5 @@ library.add(fas)
 library.add(far)
 
 const app = createApp(App).component('fa-icon', FontAwesomeIcon).use(router)
-app.config.globalProperties.$api_base_url = 'http://localhost:8100'
+app.config.globalProperties.$api_base_url = 'http://localhost:8000'
 app.mount('#app')
