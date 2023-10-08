@@ -50,6 +50,10 @@
     margin-top: 0;
   }
 
+  input, button {
+    font-size: 20px;
+  }
+
   input {
     width: 400px;
     /* border-top-right-radius: 0;
