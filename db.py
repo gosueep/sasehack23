@@ -34,14 +34,15 @@ def db_get_user(userID):
 
 def db_match(userID):    
     user = db_get_user(userID)
+    print(user)
     
     matches = []
     for person in db["people"].find():
-        if user['location'] != person['location']:
+        if user['hobbies'] != person['hobbies']:
             continue
-        for i in user['interests']:
+        for i in user['hobbies']:
             # if "asdf" in ["asdf", "ab"]
-            if i in person['interests']:
+            if i in person['hobbies']:
                 matches.append(person)
     
     return matches[random.randrange(0,len(matches))]
