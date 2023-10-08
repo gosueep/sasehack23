@@ -26,18 +26,30 @@ nav a.router-link-exact-active {
 input, button {
   background-color: #ffdeaf;
   border: 1px solid #0000004f;
-  font-size: 18px;
+  font-size: 16px;
   padding: 8px 12px;
   border-radius: 4px;
   transition: all 0.24s;
 }
 
-input:hover, input:focus, button:hover {
+button.btn-gray {
+  background-color: #f2f0eb;
+}
+
+button.btn-gray:hover:not(:disabled) {
+  background-color: #f2e7cc;
+}
+
+input:hover, input:focus, button:hover:not(:disabled) {
   background-color: #ffce89;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   cursor: pointer;
+}
+
+button:active:not(:disabled) {
+  background-color: #f4b967;
 }
 
 input:focus {
