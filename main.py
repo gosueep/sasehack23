@@ -1,7 +1,8 @@
 from typing import Union
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from db import db_create_user, db_get_messages, db_get_user, db_match, db_chat_screen
+from db import db_create_user, db_get_messages, db_get_user, db_match
+# db_chat_screen
 
 ##############
 ## API
@@ -92,9 +93,13 @@ texts = []
 async def send_message(req: Request):
     json = await req.json()             #will be a request to send a message
     message = json.get("message")
+    user_id = json.get("user_id")
+    
+    print(message)
+    print(texts)
     
     if message:
-        texts.append({"sender": "You (The person writing the messaeg)", "message": message})    #the message will be appeneded to the texts array
+        texts.append({"sender": user_id, "message": message})    #the message will be appeneded to the texts array
         return {"message": "Delivered"}     #if there is a message
     else:
         return {"message": "Empty"}         #if there is no message
