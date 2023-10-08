@@ -38,16 +38,27 @@ async def create_user(req: Request):
     return {'user_id': uid}
 
 
+# Get a user
+@app.post("/get_user")
+async def get_user(req: Request):
+    
+    {
+        "user_id": "asdfasdf"
+    }
+    
+    json = await req.json()
+    print('json', json)
+    user = db_get_user(json['user_id'])
+    user['_id'] = str(user['_id'])
+    print(user)
+    return {'user': user}
+
 # Get a match
 @app.post("/get_match")
 async def get_match(req: Request):
     
     {
-        "name": "asdfasdf",
-        "pronouns": "he",
-        "interests": "[dsfasdf, asdf, asd, asdf]",
-        "location": "golden",
-        "events": "[]"
+        "user_id": "asdfasdf"
     }
     
     json = await req.json()
