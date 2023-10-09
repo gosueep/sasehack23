@@ -62,6 +62,7 @@
 import ProfileBox from '@/components/ProfileBox.vue'
 
 async function _delay (ms) {
+  // eslint-disable-next-line
   return new Promise(r => setTimeout(r, ms))
 }
 

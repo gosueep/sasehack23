@@ -1,10 +1,16 @@
 import random
 from bson.objectid import ObjectId
 from pymongo import MongoClient
+
+import os
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
+
+
 def get_database():
  
    # Provide the mongodb atlas url to connect python to mongodb using pymongo
-   CONNECTION_STRING = "mongodb+srv://mongo:IU1vQmHaqMbox24D@sase.tktciax.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
+   CONNECTION_STRING = f'mongodb+srv://mongo:{os.getenv("db_pass")}@sase.tktciax.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
  
    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
    client = MongoClient(CONNECTION_STRING)
