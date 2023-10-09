@@ -24,6 +24,11 @@ const routes = [
     path: '/matching',
     name: 'matching',
     component: () => import('../views/MatchView.vue')
+  },
+  {
+    path: '/connect',
+    name: 'connect',
+    component: () => import('../views/ConnectView.vue')
   }
 ]
 
