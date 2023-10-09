@@ -128,7 +128,7 @@ export default {
       console.log(uid.user_id)
       localStorage.setItem('uid', uid.user_id)
       this.isSubmitting = false
-      // this.$router.push('/matching')
+      this.$router.push('/matching')
     }
   }
 }
