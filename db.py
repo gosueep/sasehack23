@@ -2,6 +2,8 @@ import random
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 
+import openai
+
 import os
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
@@ -99,3 +101,12 @@ if __name__ == "__main__":
     print(x)
     
     
+#this is the ai that will create suggestions on what to0 say
+def generate_suggestion(prompt):
+    response = openai.chat_Completion.create(
+        engine="text-davinci-002",  # Will use this engine because its created for the purpose of language generation
+        prompt=prompt,
+        max_tokens=20,  # I feel like 20 is enough
+        temperature=0.5,  # This is just how creative the responses will be, max will be 1
+    )
+    return response.choices[0].text.strip()
